@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     tools {
+        jdk 'jdk-11'   // or jdk-17
         maven 'maven-3.9'
-        jdk 'jdk-17'
     }
-
+    
     environment {
         APP_NAME = "my-java-app"
     }
