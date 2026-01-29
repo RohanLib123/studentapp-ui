@@ -13,8 +13,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/org/repo.git'
+                git branch: 'master',
+                    url: 'https://github.com/RohanLib123/studentapp-ui.git'
             }
         }
 
