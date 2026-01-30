@@ -83,7 +83,7 @@ pipeline {
                     """
                 }
             }
-        }
+        
 
 
         /* ---------------- MANUAL APPROVAL ---------------- */
@@ -112,7 +112,7 @@ pipeline {
                     """
                 }
             }
-        }
+        
 
         /* ---------------- MANUAL APPROVAL ---------------- */
         stage('Approve for Prod') {
@@ -142,14 +142,13 @@ pipeline {
             }
         }
 
-    post {
-        success {
-            echo "✅ Pipeline completed successfully"
+        post {
+            success {
+                echo "✅ Pipeline completed successfully"
+            }
+            failure {
+                echo "❌ Pipeline failed"
+            }
         }
-        failure {
-            echo "❌ Pipeline failed"
-        }
-    }
-    }
-}
+    }    
 
