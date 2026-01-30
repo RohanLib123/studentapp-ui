@@ -83,6 +83,7 @@ pipeline {
                     """
                 }
             }
+        }
 
 
         /* ---------------- MANUAL APPROVAL ---------------- */
@@ -149,4 +150,6 @@ pipeline {
             echo "❌ Pipeline failed"
         }
     }
+    }
 }
+
