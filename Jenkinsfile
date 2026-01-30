@@ -111,6 +111,7 @@ pipeline {
                     """
                 }
             }
+        }
 
         /* ---------------- MANUAL APPROVAL ---------------- */
         stage('Approve for Prod') {
