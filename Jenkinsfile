@@ -71,10 +71,10 @@ pipeline {
                 aws ssm send-command \
                 --instance-ids ${DEV_INSTANCE_ID} \
                 --document-name "AWS-RunShellScript" \
-                --parameters commands=[
+                --parameters 'commands=[
                     "aws s3 cp s3://${S3_BUCKET}/${APP_NAME}/${BUILD_NUMBER}/app.jar /opt/app/app.jar",
                     "systemctl restart ${APP_NAME}"
-                ] \
+                ]' \
                 --region ${AWS_REGION}
                 """
             }
