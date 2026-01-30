@@ -71,18 +71,18 @@ pipeline {
                     $class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-jenkins-creds'
                 ]]) {
-                sh """
-                aws ssm send-command \
-                  --instance-ids ${DEV_INSTANCE_ID} \
-                  --document-name "AWS-RunShellScript" \
-                  --parameters 'commands=[
-                    "aws s3 cp s3://${S3_BUCKET}/${APP_NAME}/${BUILD_NUMBER}/app.jar /opt/app/app.jar",
-                    "sudo systemctl restart ${APP_NAME}"
-                  ]' \
-                  --region ${AWS_REGION}
-                """
+                    sh """
+                    aws ssm send-command \
+                      --instance-ids ${DEV_INSTANCE_ID} \
+                      --document-name "AWS-RunShellScript" \
+                      --parameters 'commands=[
+                        "aws s3 cp s3://${S3_BUCKET}/${APP_NAME}/${BUILD_NUMBER}/app.jar /opt/app/app.jar",
+                        "sudo systemctl restart ${APP_NAME}"
+                      ]' \
+                      --region ${AWS_REGION}
+                    """
+                }
             }
-        }
 
 
         /* ---------------- MANUAL APPROVAL ---------------- */
@@ -99,18 +99,18 @@ pipeline {
                     $class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-jenkins-creds'
                 ]]) {
-                sh """
-                aws ssm send-command \
-                --instance-ids ${TEST_INSTANCE_ID} \
-                --document-name "AWS-RunShellScript" \
-                --parameters 'commands=[
-                    "aws s3 cp s3://${S3_BUCKET}/${APP_NAME}/${BUILD_NUMBER}/app.jar /opt/app/app.jar",
-                    "sudo systemctl restart ${APP_NAME}"
-                  ]' \
-                  --region ${AWS_REGION}
-                """
+                    sh """
+                    aws ssm send-command \
+                        --instance-ids ${TEST_INSTANCE_ID} \
+                        --document-name "AWS-RunShellScript" \
+                        --parameters 'commands=[
+                            "aws s3 cp s3://${S3_BUCKET}/${APP_NAME}/${BUILD_NUMBER}/app.jar /opt/app/app.jar",
+                            "sudo systemctl restart ${APP_NAME}"
+                      ]' \
+                      --region ${AWS_REGION}
+                    """
+                }
             }
-        }
 
         /* ---------------- MANUAL APPROVAL ---------------- */
         stage('Approve for Prod') {
@@ -126,19 +126,19 @@ pipeline {
                     $class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-jenkins-creds'
                 ]]) {
-                sh """
-                aws ssm send-command \
-                --instance-ids ${PROD_INSTANCE_ID} \
-                --document-name "AWS-RunShellScript" \
-                --parameters 'commands=[
-                    "aws s3 cp s3://${S3_BUCKET}/${APP_NAME}/${BUILD_NUMBER}/app.jar /opt/app/app.jar",
-                    "sudo systemctl restart ${APP_NAME}"
-                  ]' \
-                  --region ${AWS_REGION}
-                """
+                    sh """
+                    aws ssm send-command \
+                        --instance-ids ${PROD_INSTANCE_ID} \
+                        --document-name "AWS-RunShellScript" \
+                        --parameters 'commands=[
+                            "aws s3 cp s3://${S3_BUCKET}/${APP_NAME}/${BUILD_NUMBER}/app.jar /opt/app/app.jar",
+                            "sudo systemctl restart ${APP_NAME}"
+                      ]' \
+                      --region ${AWS_REGION}
+                    """
+                }
             }
         }
-    }
 
     post {
         success {
