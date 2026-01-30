@@ -69,16 +69,17 @@ pipeline {
             steps {
                 sh """
                 aws ssm send-command \
-                --instance-ids ${DEV_INSTANCE_ID} \
-                --document-name "AWS-RunShellScript" \
-                --parameters 'commands=[
+                  --instance-ids ${DEV_INSTANCE_ID} \
+                  --document-name "AWS-RunShellScript" \
+                  --parameters 'commands=[
                     "aws s3 cp s3://${S3_BUCKET}/${APP_NAME}/${BUILD_NUMBER}/app.jar /opt/app/app.jar",
-                    "systemctl restart ${APP_NAME}"
-                ]' \
-                --region ${AWS_REGION}
+                    "sudo systemctl restart ${APP_NAME}"
+                  ]' \
+                  --region ${AWS_REGION}
                 """
             }
         }
+
 
         /* ---------------- MANUAL APPROVAL ---------------- */
         stage('Approve for Test') {
