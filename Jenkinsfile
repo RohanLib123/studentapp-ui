@@ -20,7 +20,7 @@ pipeline {
         /* ---------------- CHECKOUT ---------------- */
         stage('Checkout - Dev') {
             steps {
-                git branch: 'dev',
+                git branch: 'master',
                     credentialsId: 'github-token',
                     url: 'https://github.com/RohanLib123/studentapp-ui.git'
             }
